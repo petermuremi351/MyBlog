@@ -3,6 +3,7 @@
 {% block content %}
 
 {% if user.is_authenticated %}
+ {% if user.id == post.author.id%}
 
 <h1>Delete Post</h1>
 
@@ -17,7 +18,9 @@
     <button class="btn btn-secondary">Delete Post!</button>
 </form>
 </div>
-
+    {% else %}
+        You are not alowed
+    {% endif %}
 {% else %}
 
 YOU ARE NOT LOGIN...

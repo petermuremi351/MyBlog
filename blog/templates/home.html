@@ -10,16 +10,19 @@
         - {{ post.author.first_name }}
         {{ post.author.last_name }}  
             {% if user.is_authenticated %}
+                {% if user.id == post.author.id%}
         <small><a href="{% url 'update_post' post.pk %}">Edit Post</a> 
             <a href="{% url 'delete_post' post.pk %}">Delete Post</a></small><br />
+                {% endif %}
             {% endif %}
 
             <!-- slice for reducing the words from 1000 to any small figure  -->
-        {{ post.body|slice:":200 " }}
+        {{ post.body|slice:":50 " }}
 
     </li>
 
 
     {% endfor %}
 </ul>
+
 {% endblock %}

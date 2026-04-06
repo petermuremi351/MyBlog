@@ -2,10 +2,11 @@
 {% block title %}Create A New Post...{% endblock %}
 {% block content %}
 
+
 <div class="container mt-5">
     <div class="row justify-content-center">
         <div class="col-12 col-lg-10">  <!-- ~80% width -->
-
+          {% if user.is_authenticated %}  
             <h1 class="mb-4">Add Post...</h1>
 
             <div class="card p-4 shadow-sm">
@@ -16,6 +17,13 @@
                     <button class="btn btn-secondary w-100">Post</button>
                 </form>
             </div>
+            <script>
+                var name = "{{ user.id }}";
+                document.getElementById("peter").value = name;
+            </script>
+           {% else %} 
+           You are not allowed here...
+           {% endif %}
 
         </div>
     </div>
