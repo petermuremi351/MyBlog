@@ -17,7 +17,8 @@
             {% endif %}
 
             <!-- slice for reducing the words from 1000 to any small figure  -->
-        {{ post.body|slice:":50 " }}
+        {{ post.snippet }}     
+        <!-- {{ post.body|safe|slice:":50" }} -->
 
     </li>
 

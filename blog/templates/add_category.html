@@ -1,23 +1,41 @@
 {% extends 'base.html' %}
-{% block title %}Create A New Blog category...{% endblock %}
+{% block title %}Create A New Blog Category{% endblock %}
+
 {% block content %}
 
 {% if user.is_authenticated %}
-<h1>Add Category...</h1>
-<br /><br />
-<div class="form-group">
-    <form method="POST">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button class="btn btn-secondary">Add Category</button>
-    </form>
+
+<div class="container d-flex justify-content-center mt-5">
+    <div class="card shadow-lg p-4" style="width: 65%; border-radius: 15px;">
+        
+        <h2 class="text-center mb-4">➕ Add New Category</h2>
+
+        <form method="POST">
+            {% csrf_token %}
+            
+            <div class="mb-3">
+                {{ form.as_p }}
+            </div>
+
+            <div class="text-center">
+                <button class="btn btn-dark px-4 py-2">
+                    Add Category
+                </button>
+            </div>
+        </form>
+
+    </div>
 </div>
+
 {% else %}
 
-YOU ARE NOT LOGIN...
+<div class="container text-center mt-5">
+    <div class="alert alert-danger shadow-sm" style="width: 50%; margin: auto;">
+        <h4>You are not logged in ⚠️</h4>
+        <p>Please log in to add a category.</p>
+    </div>
+</div>
 
 {% endif %}
-
-
 
 {% endblock %}

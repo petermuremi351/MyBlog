@@ -2,27 +2,52 @@
 {% block title %}Edit Blog Post{% endblock %}
 {% block content %}
 
-{% if user.is_authenticated %}
-    {% if user.id == post.author.id%}
+<div class="container mt-5 d-flex justify-content-center">
 
-<h1>Update Post</h1>
-<br /><br />
-<div class="form-group">
-    <form method="POST">
-        {% csrf_token %}
-        {{ form.media }}
-        {{ form.as_p }}
-        <button class="btn btn-secondary">Update</button>
-    </form>
-</div>
+    {% if user.is_authenticated %}
+        {% if user.id == post.author.id %}
+
+        <div class="card shadow-lg p-5" style="width: 85%; max-width: 700px; border-radius: 15px;">
+
+            <!-- Title -->
+            <h2 class="text-center mb-4" style="font-weight: 600;">
+                Edit Blog Post
+            </h2>
+
+            <!-- Form -->
+            <form method="POST">
+                {% csrf_token %}
+                {{ form.media }}
+                {{ form.as_p }}
+
+                <!-- Button -->
+                <div class="text-center mt-4">
+                    <button class="btn btn-primary px-4 py-2">
+                        Update Post
+                    </button>
+                </div>
+            </form>
+
+        </div>
+
+        {% else %}
+
+        <div class="alert alert-danger text-center p-4" style="width: 85%; max-width: 600px;">
+            <h5 class="mb-2">Access Denied</h5>
+            <p class="mb-0">You are not allowed to edit this post.</p>
+        </div>
+
+        {% endif %}
+
     {% else %}
-        You are not allowed...
+
+    <div class="alert alert-warning text-center p-4" style="width: 85%; max-width: 600px;">
+        <h5 class="mb-2">Not Logged In</h5>
+        <p class="mb-0">Please log in to edit posts.</p>
+    </div>
+
     {% endif %}
 
-{% else %}
-
-YOU ARE NOT LOGIN...
-
-{% endif %}
+</div>
 
 {% endblock %}

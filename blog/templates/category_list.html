@@ -1,10 +1,31 @@
 {% extends 'base.html' %}
 {% block title %}Blog Categories{% endblock %}
+
 {% block content %}
 
-<h1>Blog Categories</h1>
-{% for item in cat_menu_list %}
-<li><a class="dropdown-item" href="{% url 'category' item|slugify %}">{{ item }}</a></li>
+<div class="container mt-5">
 
-{% endfor %}
+    <h1 class="text-center mb-5">📚 Blog Categories</h1>
+
+    <div class="row g-4">
+
+        {% for item in cat_menu_list %}
+        <div class="col-md-4 col-sm-6">
+            <div class="card shadow-sm h-100 text-center p-3" style="border-radius: 15px;">
+                
+                <h5 class="mb-3">{{ item }}</h5>
+
+                <a href="{% url 'category' item|slugify %}" 
+                   class="btn btn-outline-dark">
+                   View Posts
+                </a>
+
+            </div>
+        </div>
+        {% endfor %}
+
+    </div>
+
+</div>
+
 {% endblock %}

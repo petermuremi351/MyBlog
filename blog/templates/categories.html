@@ -2,31 +2,68 @@
 
 {% block content %}
 
-    {% if category_posts %}
+<div class="container mt-5 d-flex justify-content-center">
 
-        <h1>{{ categoryblog }}</h1>
+    <div style="width: 80%;">
 
-        <ul>
+        {% if category_posts %}
 
-            {% for post in category_posts %}
-                <li><a href="{% url 'article_detail' post.pk %}">{{ post.title}}</a> - {{ post.category }} - {{ post.author.first_name }}
-                {{ post.author.last_name }}  
-                    {% if user.is_authenticated %}
-                <small><a href="{% url 'update_post' post.pk %}">Edit Post</a> 
-                    <a href="{% url 'delete_post' post.pk %}">Delete Post</a></small><br />
-                    {% endif %}
+            <h1 class="text-center mb-5">📂 {{ categoryblog }}</h1>
 
-                    <!-- slice for reducing the words from 1000 to any small figure  -->
-                {{ post.body|slice:":50 " }}
+            <div class="row justify-content-center g-4">
 
-            </li>
+                {% for post in category_posts %}
+                <div class="col-md-6">
+                    <div class="card shadow-sm h-100 p-4 text-center" style="border-radius: 15px;">
 
+                        <h4>
+                            <a href="{% url 'article_detail' post.pk %}" 
+                               class="text-dark text-decoration-none">
+                                {{ post.title }}
+                            </a>
+                        </h4>
 
-            {% endfor %}
+                        <p class="text-muted mb-2">
+                            🏷️ {{ post.category }} <br>
+                            ✍️ {{ post.author.first_name }} {{ post.author.last_name }}
+                        </p>
 
-        </ul>
-    {% else %}
-        <h2>Sorry We couldn't find the category...</h2>
-    {% endif %}
+                        <p>
+                            {{ post.body|slice:":120" }}...
+                        </p>
+
+                        {% if user.is_authenticated %}
+                        <div class="mt-3">
+                            <a href="{% url 'update_post' post.pk %}" 
+                               class="btn btn-sm btn-outline-primary me-2">
+                                Edit
+                            </a>
+                            <a href="{% url 'delete_post' post.pk %}" 
+                               class="btn btn-sm btn-outline-danger">
+                                Delete
+                            </a>
+                        </div>
+                        {% endif %}
+
+                    </div>
+                </div>
+                {% endfor %}
+
+            </div>
+
+        {% else %}
+
+            <div class="text-center mt-5">
+                <div class="alert alert-warning shadow-sm" style="width: 60%; margin: auto;">
+                    <h4>⚠️ Category Not Found</h4>
+                    <p>Sorry, we couldn't find posts in this category.</p>
+                </div>
+            </div>
+
+        {% endif %}
+
+    </div>
+
+</div>
 
 {% endblock %}
