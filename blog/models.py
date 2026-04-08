@@ -25,6 +25,8 @@ class Profile(models.Model):
     facebook_url = models.CharField(max_length=255, null=True, blank=True)
     x_url = models.CharField(max_length=255, null=True, blank=True)
     instagram_url = models.CharField(max_length=255, null=True, blank=True)
+    updated_at = models.DateTimeField(auto_now=True)  # <-- tracks last update
+    
 
     def __str__(self):
         return str(self.user)
@@ -40,6 +42,7 @@ class Post(models.Model):
     category = models.CharField(max_length=255)
     snippet = models.CharField(max_length=255,)
     likes = models.ManyToManyField(User, related_name='blog_posts')
+    updated_at = models.DateTimeField(auto_now=True)  # <-- tracks last update
 
     def total_likes(self):
         return self.likes.count()

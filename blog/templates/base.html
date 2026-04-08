@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{% block title %}muremi blog{% endblock %}</title>
+    <title>{% block title %}Enjoy Our Blogs{% endblock %}</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
 
@@ -57,14 +57,21 @@
                         <a class="nav-link" href="{% url 'add_category' %}">Add Category</a>
                     </li>
 
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'edit_profile' %}">Edit Profile</a>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            Profile
+                        </a>
+                        <ul class="dropdown-menu">
+                            
+                            <li><a class="dropdown-item" href="{% url 'edit_profile'  %}">Edit Settings</a></li>
+                            <li><a class="dropdown-item" href="{% url 'edit_profile_page' user.profile.id  %}">Edit Profile Page</a></li>
+                            <li><a class="dropdown-item" href="{% url 'show_profile_page' user.profile.id %}">Show Profile Page</a></li>
+                           
+                        </ul>
                     </li>
 
                     
-
-
-
                     <li class="nav-item">
                         <a href="#" class="nav-link" onclick="confirmLogout(event)">
                             Logout
