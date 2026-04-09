@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block title %}Create A New Profile Page{% endblock %}
+{% block content %}
+
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-12 col-lg-10">  <!-- ~80% width -->
+          {% if user.is_authenticated %}  
+            <h1 class="mb-4">Create Profile Page...</h1>
+
+            <div class="card p-4 shadow-sm">
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    
+                    {{ form.as_p }}
+                    <button class="btn btn-secondary w-100">Create Profile Page</button>
+                </form>
+            </div>
+           
+           {% else %} 
+           You are not allowed here...
+           {% endif %}
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

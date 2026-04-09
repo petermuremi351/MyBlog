@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block title %}Comment On Blog Post{% endblock %}
+{% block content %}
+
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-12 col-lg-10">  <!-- ~80% width -->
+           
+            <h1 class="mb-4">Add Comment...</h1>
+
+            <div class="card p-4 shadow-sm">
+                <form method="POST">
+                    {% csrf_token %}
+                    
+                    {{ form.as_p }}
+                    <button class="btn btn-secondary w-100">Add Comment</button>
+                </form>
+            </div>
+            
+           
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

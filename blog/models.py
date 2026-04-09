@@ -4,7 +4,6 @@ from django.urls import reverse
 from datetime import datetime, date
 from ckeditor.fields import RichTextField
 
-
 class Category(models.Model):
     name = models.CharField(max_length=255)
 
@@ -30,17 +29,20 @@ class Profile(models.Model):
 
     def __str__(self):
         return str(self.user)
+    
+    def get_absolute_url(self):
+        return reverse('home')
 
 
 class Post(models.Model):
-    title = models.CharField(max_length=255)
+    title = models.CharField(max_length=30)
     header_image = models.ImageField(null=True, blank=True, upload_to="images/")
-    title_tag = models.CharField(max_length=255)
+    title_tag = models.CharField(max_length=30)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     body = RichTextField(blank=True, null=True)
     post_date = models.DateField(auto_now_add=True)
-    category = models.CharField(max_length=255)
-    snippet = models.CharField(max_length=255,)
+    category = models.CharField(max_length=20)
+    snippet = models.CharField(max_length=100)
     likes = models.ManyToManyField(User, related_name='blog_posts')
     updated_at = models.DateTimeField(auto_now=True)  # <-- tracks last update
 
@@ -53,3 +55,16 @@ class Post(models.Model):
     def get_absolute_url(self):
         # return reverse('article_detail', args=(str(self.id)))
         return reverse("home")
+    
+    
+class Comment(models.Model):
+        post = models.ForeignKey(Post, related_name="comments", on_delete=models.CASCADE)
+        name = models.CharField(max_length=255)
+        body = models.TextField()
+        date_added = models.DateTimeField(auto_now_add=True)
+
+        def __str__(self):
+            return '%s - %s' % (self.post.title, self.name)
+        
+        class Meta:
+            ordering = ['-date_added']
