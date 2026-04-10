@@ -24,7 +24,7 @@ class Profile(models.Model):
     facebook_url = models.CharField(max_length=255, null=True, blank=True)
     x_url = models.CharField(max_length=255, null=True, blank=True)
     instagram_url = models.CharField(max_length=255, null=True, blank=True)
-    updated_at = models.DateTimeField(auto_now=True)  # <-- tracks last update
+    updated_at = models.DateTimeField(auto_now=True)  
     
 
     def __str__(self):
@@ -42,15 +42,18 @@ class Post(models.Model):
     body = RichTextField(blank=True, null=True)
     post_date = models.DateField(auto_now_add=True)
     category = models.CharField(max_length=20)
-    snippet = models.CharField(max_length=100)
+    snippet = models.CharField(max_length=48)
     likes = models.ManyToManyField(User, related_name='blog_posts')
     updated_at = models.DateTimeField(auto_now=True)  # <-- tracks last update
+    
 
     def total_likes(self):
         return self.likes.count()
 
     def __str__(self):
         return self.title + "|" + str(self.author)
+    
+    
 
     def get_absolute_url(self):
         # return reverse('article_detail', args=(str(self.id)))

@@ -26,7 +26,12 @@ SECRET_KEY = 'django-insecure-d$42$puirq#wwc#_%@3dw)%g4qnj%d!hmn8xuxu@ds0^h!%8i&
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+# ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    '127.0.0.1',
+    'localhost',
+    'doretta-unpulverable-eldora.ngrok-free.dev',
+]
 
 
 # Application definition
@@ -132,3 +137,10 @@ STATICFILES_DIR = (
 )
 LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'home'
+
+
+
+
+CSRF_TRUSTED_ORIGINS = [
+    'https://doretta-unpulverable-eldora.ngrok-free.dev',
+]

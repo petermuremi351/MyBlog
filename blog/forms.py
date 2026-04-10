@@ -20,6 +20,7 @@ class PostForm(forms.ModelForm):
             "body",
             "snippet",
             "header_image",
+            
         )
         widgets = {
             "title": forms.TextInput(

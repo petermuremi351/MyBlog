@@ -6,6 +6,7 @@ from django.contrib.auth.views import PasswordChangeView
 from django.urls import reverse_lazy
 from .forms import SignUpForm, EditProfileForm, PassworChangingForm, ProfilePageForm
 from blog.models import Profile
+from django.contrib import messages
 
 class CreateProfilePageView(CreateView):
     model = Profile
@@ -23,6 +24,10 @@ class EditProfilePageView(generic.UpdateView):
     template_name = 'registration/edit_profile_page.html'
     fields = ["bio", "profile_pic", "website_url", "facebook_url", "x_url", "instagram_url"]
     success_url = reverse_lazy('home')
+
+    def form_valid(self, form):
+        messages.success(self.request, "Profile Updated Successfully!")
+        return super().form_valid(form)
 
 class ShowProfilePageView(DetailView):
     model = Profile
@@ -55,8 +60,12 @@ class UserRegisterView(generic.CreateView):
 
 class UserEditView(generic.UpdateView):
     form_class = EditProfileForm
-    template_name = 'registration/edit_profile.html'
+    template_name = 'registration/edit_settings.html'
     success_url = reverse_lazy('home')
+
+    def form_valid(self, form):
+        messages.success(self.request, "Settings Updated Successfully!")
+        return super().form_valid(form)
 
     def get_object(self):
         return self.request.user   
